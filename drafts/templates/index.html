@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Keyboard Swiss Tournament</title>
+</head>
+<body>
+  <h1>Keyboard Swiss Tournament</h1>
+  <p>Registered Players: {{ total_players }} | Current Round: {{ current_round }}</p>
+  <ul>
+    <li><a href="{{ url_for('tournament') }}">Continue Tournament</a></li>
+    <li><a href="{{ url_for('list_sets') }}">View All Keyboard Sets</a></li>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Round {{ current_round }} - Match {{ match_index + 1 }} of {{ total_matches }}</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; background: #f2f2f2; }
+    .progress-container { position: fixed; top: 0; left: 0; width: 100%; background: #ddd; padding: 5px 0; z-index: 200; }
+    .progress { height: 10px; background: #007BFF; width: {{ round_progress }}%; transition: width 0.5s; }
+    .progress-text { text-align: center; font-size: 14px; color: #333; }
+    h1 { text-align: center; margin-top: 50px; }
+    .panels { display: flex; margin-top: 20px; height: calc(100vh - 130px); }
+    .panel { flex: 1; overflow-y: auto; padding: 10px; box-sizing: border-box; }
+    .left-panel { border-right: 1px solid #ccc; }
+    .right-panel { border-left: 1px solid #ccc; }
+    .images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; justify-items: center; }
+    .images-grid img { width: 200px; height: 200px; object-fit: cover; border: 1px solid #ddd; }
+    .center-buttons { width: 240px; position: fixed; top: 50%; left: calc(50% - 120px); transform: translateY(-50%); display: flex; flex-direction: row; gap: 10px; z-index: 100; }
+    .center-buttons button { flex: 1; padding: 8px; background-color: #007BFF; color: #fff; border: none; cursor: pointer; font-size: 14px; }
+    .center-buttons button:hover { background-color: #0056b3; }
+    .back-link { text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="progress-container">
+    <div class="progress"></div>
+    <div class="progress-text">Round {{ current_round }}: Match {{ match_index + 1 }} of {{ total_matches }}</div>
+  </div>
+  <h1>Round {{ current_round }} - Select the Winner</h1>
+  <form method="post">
+    <div class="panels">
+      <div class="panel left-panel">
+        <div class="images-grid">
+          {% for img in p_left.images %}
+            <img src="{{ url_for('static', filename=img) }}" alt="{{ p_left.name }}">
+          {% endfor %}
+        </div>
+        <p style="text-align: center;"><strong>{{ p_left.name }}</strong></p>
+      </div>
+      <div class="panel right-panel">
+        <div class="images-grid">
+          {% for img in p_right.images %}
+            <img src="{{ url_for('static', filename=img) }}" alt="{{ p_right.name }}">
+          {% endfor %}
+        </div>
+        <p style="text-align: center;"><strong>{{ p_right.name }}</strong></p>
+      </div>
+    </div>
+    <div class="center-buttons">
+      <button type="submit" name="winner_id" value="{{ p_left.id }}">Left</button>
+      <button type="submit" name="winner_id" value="{{ p_right.id }}">Right</button>
+    </div>
+    <input type="hidden" name="p1_id" value="{{ p_left.id }}">
+    <input type="hidden" name="p2_id" value="{{ p_right.id }}">
+  </form>
+  <p class="back-link"><a href="{{ url_for('index') }}">Back to Home</a></p>
+</body>
+</html>
