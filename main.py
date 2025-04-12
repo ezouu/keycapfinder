@@ -494,3 +494,13 @@ if __name__ == '__main__':
     print("Starting Flask server...")
     app.run(debug=True)
 
+from flask_frozen import Freezer
+
+freezer = Freezer(app)
+
+if __name__ == '__main__':
+    # When running normally, start the Flask development server:
+    # app.run(debug=True)
+    # When you want to freeze the site, run this file with an extra argument, or
+    # run a separate freeze script.
+    freezer.freeze()
