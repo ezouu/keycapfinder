@@ -1,0 +1,4 @@
+title: Keyset Finder
+year: 2025 -- 2025
+image: images/gmk.jpg
+description: Used flask html/python to build a simple Swiss Stage Competition simulator with automatic bottom quadrant filtering to optimally determine what the best keycap set for your keyboard is. Project scrapes various website for keyboard data and displays them in a 1v1 formatted comparisson match until winner is decided. 
